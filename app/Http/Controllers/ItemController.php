@@ -13,6 +13,7 @@ class ItemController extends Controller
     {
         return view('inventory.create');
     }
+
     public function index()
     {
         // $items = new Item();
@@ -22,6 +23,7 @@ class ItemController extends Controller
             "items" => Item::all()
         ]);
     }
+
     public function show($id)
     {
         $item = Item::findOrFail($id);
@@ -29,6 +31,23 @@ class ItemController extends Controller
 
         return view('inventory.show', compact("item"));
     }
+
+    public function edit($id)
+    {
+        $item = Item::findOrFail($id);
+        return view("inventory.edit", compact('item'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $item = Item::findOrFail($id);
+        $item->name = $request->name;
+        $item->price = $request->price;
+        $item->stock = $request->stock;
+        $item->update();
+        return redirect()->route('item.index');
+    }
+
     public function store(Request $request)
     {
         $item = new Item();
@@ -48,6 +67,7 @@ class ItemController extends Controller
 
         // $item = Item::create($request->all());
     }
+
     public function destory($id)
     {
         $item = Item::findOrFail($id);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\categoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\pageController;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,6 @@ Route::get('inventory', [ItemController::class, 'index'])->name('item.index');
 Route::post('inventory', [ItemController::class, 'store'])->name('item.store');
 Route::get('inventory/create', [ItemController::class, 'create'])->name('item.create');
 Route::get('inventory/{id}', [ItemController::class, 'show'])->name('item.show');
+Route::get('inventory/{id}/edit', [ItemController::class, 'edit'])->name('item.edit');
 Route::delete('inventory/{id}', [ItemController::class, 'destory'])->name('item.destory');
+Route::put('inventory/{id}', [ItemController::class, 'update'])->name('item.update');
