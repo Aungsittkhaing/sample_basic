@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\pageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [pageController::class, 'home'])->name('page.home');
+Route::get('inventory', [ItemController::class, 'index'])->name('item.index');
+Route::post('inventory', [ItemController::class, 'store'])->name('item.store');
+Route::get('inventory/create', [ItemController::class, 'create'])->name('item.create');
+Route::get('inventory/{id}', [ItemController::class, 'show'])->name('item.show');
+Route::delete('inventory/{id}', [ItemController::class, 'destory'])->name('item.destory');
