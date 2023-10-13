@@ -25,7 +25,7 @@
                     <td>
                         <a href="{{ route('item.show', $item->id) }}" class="btn btn-outline-primary btn-sm">Detail</a>
                         <a href="{{ route('item.edit', $item->id) }}" class="btn btn-outline-info btn-sm">Edit</a>
-                        <form method="post" class="d-inline-block" action="{{ route('item.destory', $item->id) }}">
+                        <form method="post" class="d-inline-block" action="{{ route('item.destroy', $item->id) }}">
                             @method('delete')
                             @csrf
                             <button class="btn btn-sm btn-outline-danger">Delete</button>
