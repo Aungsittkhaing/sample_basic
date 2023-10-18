@@ -10,7 +10,7 @@
             <td>{{ $category->name }}</td>
         </tr>
         <tr>
-            <td>Price</td>
+            <td>Description</td>
             <td>{{ $category->description }}</td>
         </tr>
         <tr>
