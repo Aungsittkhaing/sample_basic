@@ -9,4 +9,9 @@
         harum aliquam architecto cum esse blanditiis aspernatur consequatur corporis asperiores necessitatibus nesciunt.
         Consectetur, dignissimos.
     </p>
+    {{-- testing route parameter --}}
+    <div class="alert alert-info">
+        {{ route('item.show', [10, 'a' => 'aaa', 'b' => 'bbb', 'c' => 'ccc']) }}
+        {{-- {{ route('multi', [5, 5, 'a' => 'aa']) }} --}}
+    </div>
 @endsection

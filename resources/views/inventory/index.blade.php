@@ -64,7 +64,8 @@
                         <form method="post" class="d-inline-block" action="{{ route('item.destroy', $item->id) }}">
                             @method('delete')
                             @csrf
-                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                            <button class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('Are you sure to delete?')">Delete</button>
                         </form>
                     </td>
                 </tr>
