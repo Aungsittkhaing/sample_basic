@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\pageController;
+use App\Http\Middleware\isAuthenticated;
+use App\Http\Middleware\isNotAuthenticated;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +35,24 @@ Route::get('multi/${x}/${y}', function ($x, $y) {
 //     Route::put('/{id}', 'update')->name('item.update');
 // });
 
-//for item
-Route::resource('item', ItemController::class);
-//for category
-Route::resource('category', categoryController::class);
+Route::middleware(isAuthenticated::class)->group(function () {
+    //for item
+    Route::resource('item', ItemController::class);
+    //for category
+    Route::resource('category', categoryController::class);
+
+    Route::controller(HomeController::class)->prefix('dashboard')->group(function () {
+        Route::get('home', 'home')->name('dashboard.home');
+    });
+});
+
+
+Route::controller(AuthController::class)->group(function () {
+    Route::middleware(isNotAuthenticated::class)->group(function () {
+        Route::get('register', 'register')->name("auth.register");
+        Route::post('register', 'store')->name('auth.store');
+        Route::get('login', 'login')->name('auth.login');
+        Route::post('login', 'check')->name('auth.check');
+    });
+    Route::post('logout', 'logout')->name('auth.logout')->middleware(isAuthenticated::class);
+});
