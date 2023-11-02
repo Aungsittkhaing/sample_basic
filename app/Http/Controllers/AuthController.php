@@ -56,4 +56,27 @@ class AuthController extends Controller
         session()->forget('auth');
         return redirect()->route('auth.login');
     }
+    public function passwordChange()
+    {
+        return view('auth.change-password');
+    }
+    public function passwordChanging(Request $request)
+    {
+        $request->validate([
+            "current_password" => "required|min:6",
+            "password" => "required|confirmed",
+        ]);
+        //checking current_password with auth_user_password
+        if (!Hash::check($request->current_password, session('auth')->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'password does not match']);
+        }
+        //update new password
+        $student = Student::find(session('auth')->id);
+        $student->password = Hash::make($request->password);
+        $student->update();
+
+        //clear auth session
+        session()->forget('auth');
+        return redirect()->route('auth.login');
+    }
 }

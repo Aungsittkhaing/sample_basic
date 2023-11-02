@@ -25,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('user', function () {
             return session('auth') ? true : false;
         });
+        Blade::if('notUser', function () {
+            return !session('auth');
+        });
     }
 }
