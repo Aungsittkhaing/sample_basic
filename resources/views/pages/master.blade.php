@@ -19,6 +19,7 @@
                 @include('pages.nav')
             </div>
             <div class="col-12 col-md-9">
+                @include('pages.mail_verified_noti')
                 @yield('content')
             </div>
         </div>

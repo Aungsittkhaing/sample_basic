@@ -7,6 +7,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\pageController;
 use App\Http\Middleware\isAuthenticated;
 use App\Http\Middleware\isNotAuthenticated;
+use App\Http\Middleware\isVerified;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,10 +54,19 @@ Route::controller(AuthController::class)->group(function () {
         Route::post('register', 'store')->name('auth.store');
         Route::get('login', 'login')->name('auth.login');
         Route::post('login', 'check')->name('auth.check');
+
+        Route::get('forgot', 'forgot')->name("auth.forgot");
+        Route::post('check-email', 'checkEmail')->name('auth.checkEmail');
+        Route::get('new-password', 'newPassword')->name("auth.newPassword");
+        Route::post('reset-password', 'resetPassword')->name("auth.resetPassword");
     });
     Route::middleware(isAuthenticated::class)->group(function () {
         Route::post('logout', 'logout')->name('auth.logout');
-        Route::get('password-change', 'passwordChange')->name('auth.passwordChange');
-        Route::post('password-change', 'passwordChanging')->name('auth.passwordChanging');
+        Route::middleware(isVerified::class)->group(function () {
+            Route::get('password-change', 'passwordChange')->name('auth.passwordChange');
+            Route::post('password-change', 'passwordChanging')->name('auth.passwordChanging');
+        });
+        Route::get('verify', 'verify')->name('auth.verify');
+        Route::post('verify', 'verifying')->name('auth.verifying');
     });
 });
