@@ -12,7 +12,7 @@ class ItemApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('cat');
+        // $this->middleware('cat');
     }
     /**
      * Display a listing of the resource.

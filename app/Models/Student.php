@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $hidden = ['password', 'user_token'];
+    protected $hidden = ['password', 'user_token', 'verify_code', 'api_token'];
 }
